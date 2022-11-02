@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from tkinter import messagebox
+from Conexion import *
 
 import pymysql
 
@@ -24,23 +25,33 @@ def vista_login():
     Label(pantalla).pack()
 
     Label(text="Contraseña", font=("Calibri", 13)).pack()
-    password_entry = Entry(pantalla, width=25, font=("Calibri", 13), textvariable=password_verify)
+    password_entry = Entry(pantalla, show="*", width=25, font=("Calibri", 13), textvariable=password_verify)
     password_entry.pack()
     Label(pantalla).pack()
 
 
 
-    Button(pantalla, text="Ingresar", height="2", width="15", font=("Calibri", 12), bg="BLUE").pack()
+    Button(pantalla, text="Ingresar", height="2", width="15", font=("Calibri", 12), bg="BLUE", command=validar_datos).pack()
     pantalla.mainloop()
 
-def inserta_datos():
+def validar_datos():
     bd = pymysql.connect(
-        host: "localhost",
-        user: "root",
-        password: "",
-        db: "sistema_ventas"
+        host= "localhost",
+        port=2974,
+        user= "root",
+        password= "",
+        db= "sistema_ventas"
     )
+    fcursor = bd.cursor()
+    sql = "SELECT COUNT(*) FROM usuario"
+    try:
+        fcursor.execute(sql)
+        bd.commit()
+        messagebox.showinfo(message="Conexion exitosa", title="Aviso")
+    except:
+        bd.rollback()
+        messagebox.showinfo(message="Fallo en la conexion", title="Aviso")
+    bd.close()
 
 
-if __name__ == "__main__":
-    vista_login()
+
