@@ -3,7 +3,13 @@ import pymysql
 class Conexion:
 
     def __init__(self):
-        self.bd = None
+        pass
 
-    def conectar(self, host:str, port:int, user:str, password:str, db:str):
-        return pymysql.connect(host= host, port=port, user= user, password= password, db= db)
+    def conectar(self):
+        return pymysql.connect(
+            host="localhost",
+            port=2974,
+            user="root",
+            password="",
+            db="sistema_ventas"
+        )
