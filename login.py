@@ -33,6 +33,13 @@ def vista_login():
     Button(pantalla, text="Ingresar", height="2", width="15", font=("Calibri", 12), bg="BLUE").pack()
     pantalla.mainloop()
 
+def inserta_datos():
+    bd = pymysql.connect(
+        host: "localhost",
+        user: "root",
+        password: "",
+        db: "sistema_ventas"
+    )
 
 
 if __name__ == "__main__":
