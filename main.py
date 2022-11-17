@@ -1,7 +1,7 @@
-from login import *
+from Principal import *
 
 
 if __name__ == "__main__":
-    main()
-
+    login = Principal()
+    login.ventana()
 
